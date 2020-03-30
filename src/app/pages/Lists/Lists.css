@@ -2,3 +2,25 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.input-field-container{
+    margin: 30px 0px;
+    padding: 15px 0px;
+    display: flex;
+    justify-content: center;
+    background-color: #ebebf0;
+}
+
+.input-field-container::after{
+    position: absolute;
+    left: 58%;
+    content: "🔍";
+    cursor: pointer;
+}
+
+.input-field{
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 1px solid #000000;
+    background-color: #ebebf0;
+}

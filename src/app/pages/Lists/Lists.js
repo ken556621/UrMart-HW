@@ -7,12 +7,24 @@ class Lists extends Component {
     constructor(props){
         super(props);
         this.state = {
-            allLists: []
+            allLists: [],
+            searchLists: [],
+            searchMode: false
         }
     }
 
     componentDidMount(){
-        this.fetchYoutubeData()
+        this.fetchYoutubeData();
+        //infinite scroll
+        window.addEventListener("scroll", () => {
+            console.log("test")
+        })
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener("scroll", () => {
+            console.log("test")
+        })
     }
 
     fetchYoutubeData = () => {
@@ -34,17 +46,44 @@ class Lists extends Component {
         }).catch(err => console.log(err))
     }
 
-    render() { 
+    handleInput = (e) => {
+        if(e.target.value === ""){
+            this.setState({
+                searchMode: false
+            })
+            return
+        }
         const { allLists } = this.state;
+        const regex = new RegExp(e.target.value, 'i');
+        const results = allLists.filter(list => list.snippet.title.match(regex));
+        this.setState({
+            searchLists: results,
+            searchMode: true
+        })
+    }
+
+    render() { 
+        const { allLists, searchLists, searchMode } = this.state;
         return (
-            <div className="lists-container">
-                { 
-                    allLists.map(list => {
-                        return(
-                            <List listData = { list } key = { list.id.videoId } />
-                        )
-                    })
-                }
+            <div>
+                <div className = "input-field-container">
+                    <input className = "input-field" type = "text" onChange = { this.handleInput }></input>
+                </div>
+                <div className = "lists-container">
+                    { 
+                        !searchMode ?
+                        allLists.map(list => {
+                            return(
+                                <List listData = { list } key = { list.id.videoId } />
+                            )
+                        }) :
+                        searchLists.map(list => {
+                            return(
+                                <List listData = { list } key = { list.id.videoId } />
+                            )
+                        })
+                    }
+                </div>
             </div>
         );
     }
