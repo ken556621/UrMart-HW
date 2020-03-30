@@ -1,0 +1,10 @@
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.list-container{
+    width: 45%;
+    margin: 10px;
+    cursor: pointer;
+}
