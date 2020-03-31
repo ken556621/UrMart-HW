@@ -1,6 +1,6 @@
 const initiaState = {
-    authenticated: false,
-    authenticating: true
+    allLists: [],
+    nextPageToken: ""
 }
 
 const listsReducer = (state = initiaState, action) => {
@@ -8,14 +8,14 @@ const listsReducer = (state = initiaState, action) => {
         case "STORE_LISTS":
             return {
                 ...state, 
-                authenticating: false,
-                authenticated: true
+                allLists: action.allLists,
+                nextPageToken: action.nextPageToken
             }
         case "UPDATE_LISTS":
             return {
                 ...state, 
-                authenticating: false,
-                authenticated: true
+                allLists: action.item,
+                nextPageToken: action.nextPageToken
             }
         default :
             return state

@@ -13,7 +13,7 @@
 
 .input-field-container::after{
     position: absolute;
-    left: 58%;
+    left: 57%;
     content: "🔍";
     cursor: pointer;
 }

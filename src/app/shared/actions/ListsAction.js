@@ -1,6 +1,8 @@
-export function storeLists(cb) {
+export function storeLists(allLists, nextPageToken, cb) {
     return  {
-        type: "STORE_LISTS"
+        type: "STORE_LISTS",
+        allLists,
+        nextPageToken
     };
 }
 
