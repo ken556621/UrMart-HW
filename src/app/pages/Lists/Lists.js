@@ -17,10 +17,18 @@ class Lists extends Component {
     }
 
     componentDidMount(){
-        //check Redux store
-
+        const allLists = JSON.parse(localStorage.getItem("persist:allLists"));
+        const nextPageToken = JSON.parse(localStorage.getItem("persist:nextPageToken"));
+        window.addEventListener("scroll", this.fetchNextPageData);
+        if(allLists){
+            this.setState({
+                isLoading: false,
+                allLists,
+                nextPageToken
+            })
+            return
+        }
         this.fetchYoutubeData();
-        window.addEventListener("scroll", this.fetchNextPageData)
     }
 
     componentWillUnmount(){
